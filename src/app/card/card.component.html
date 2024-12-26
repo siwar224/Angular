@@ -1,0 +1,20 @@
+<div class="card mb-4 shadow-sm">
+  <img (click)="getDescription(category.description)" [src]="category.image" [alt]="category.title" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
+  <div class="card-body">
+    <h5 class="card-title text-uppercase" appHighlight>{{ category.title }}</h5>
+    <a [ routerLink]="['details', category.id]"class="btn btn-link">Voir détails</a>
+    <button *ngIf="category.available"  [routerLink]="['/productsCategory', category.id, category.title]"
+      class="btn btn-primary btn-sm me-2">
+      Voir produits
+    </button>
+    <span *ngIf="!category.available" class="text-muted">Catégorie non disponible</span>
+    <div class="mt-3">
+      <button (click)="addToShortList()" class="btn btn-outline-secondary btn-sm me-2">
+        <i class="bi bi-star"></i> Ajouter à la shortlist
+      </button>
+      <button (click)="sendNotif()" class="btn btn-outline-warning btn-sm">
+        <i class="bi bi-bell"></i> Envoyer notification
+      </button>
+    </div>
+  </div>
+</div>

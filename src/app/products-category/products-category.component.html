@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4" style="margin-bottom: 20px;" *ngFor="let product of list">
+      <img [src]="product.image" [alt]="product.name" class="img-fluid h-50 w-75">
+      <h3>{{product.id}}</h3>
+      <h3>{{product.name}}</h3>
+      <h3>{{product.price}}</h3>
+      <div class="d-flex gap-3">
+        <button class="btn btn-outline-primary" (click)="deletep(product)">delete</button>
+        <button class="btn btn-outline-primary" [routerLink]="['/updateproduct', product.id]">update</button>
+      </div>
+    </div>
+    </div>
+   </div>

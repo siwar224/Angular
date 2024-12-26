@@ -1,0 +1,38 @@
+<form [formGroup]="myForm" class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4"> 
+      
+        <div class="col-auto mb-3">
+          <label for="namep">Name</label>
+          <input formControlName="namep" class="form-control" id="namep">
+        
+          <div *ngIf="name.errors" class="invalid-feedback">
+            <div *ngIf="name.errors['required']">Nom obligatoire</div>
+            <div *ngIf="name.errors['minlength']">Minimum 5 caractères</div>
+          </div>
+        </div>
+  
+        <div class="col-auto mb-3">
+          <label for="descriptionp">Description</label>
+          <textarea formControlName="descriptionp" class="form-control" id="descriptionp"></textarea>
+          <div *ngIf="description.invalid && description.touched" class="invalid-feedback">
+            Description obligatoire
+          </div>
+        </div>
+  
+        <div class="col-auto mb-3">
+          <label for="pricep">Prix</label>
+          <input formControlName="pricep" class="form-control" id="pricep">
+        </div>
+  
+        <button [disabled]="myForm.invalid" (click)="addP()" class="btn btn-primary w-100">
+          Sauvegarder
+        </button>
+      </div>
+    </div>
+  </form>
+  
+  <p>Valeur du nom : {{ myForm.get('namep').value }}</p>
+  
+<!---  <input [formControl]="nametest">-->
+  

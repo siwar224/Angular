@@ -1,0 +1,90 @@
+<form #myForm="ngForm" class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4"> <!-- Réduire la largeur ici -->
+    
+      <!-- Champ Nom -->
+      <div class="col-auto mb-3">
+        <label for="name" class="form-name">Nom</label>
+        <input 
+          required
+          value="test"
+          [(ngModel)]="p.name"
+          name="namep"
+          #n="ngModel"
+          class="form-control"
+        >
+        <div class="invalid-feedback" *ngIf="n.invalid && n.touched">
+          Le nom est obligatoire
+        </div>
+      </div>
+
+      <!-- Affichage des informations de validation -->
+      <div class="mb-3">
+        valid: {{n.valid}} ** invalid : {{n.invalid}} <br>
+        touched : {{n.touched}} untouched: {{n.untouched}} <br>
+        dirty : {{n.dirty}} pristine: {{n.pristine}} <br>
+        errors: {{n.errors}} <br>
+      </div>
+
+      <!-- Champ Description -->
+      <div class="col-auto mb-3">
+        <label for="description">Description</label>
+        <textarea
+          pattern="[a-zA-Z]*"
+          minlength="5"
+          name="description"
+          required
+          [(ngModel)]="p.description"
+          #desc="ngModel"
+          class="form-control"
+        ></textarea>
+       
+        <div *ngIf="desc.errors">
+          <div *ngIf="desc.errors['required']">Champ obligatoire</div>
+          <div *ngIf="desc.errors['minlength']">
+            Minimum {{desc.errors['minlength']['requiredLength']}} caractères
+            alors que vous avez écrit {{desc.errors['minlength']['actualLength']}}
+          </div>
+          <div *ngIf="desc.errors['pattern']">Uniquement des lettres</div>
+        </div>
+      </div>
+
+      <div class="col-auto mb-3">
+        <label for="price">categories </label>
+        <input 
+          required
+          name="categories"
+          [(ngModel)]="p.categoryId"
+          #price="ngModel"
+          class="form-control"
+        >
+        <div *ngIf="price.invalid">La categorie est obligatoire </div>
+      </div>
+
+      <!-- Champ Prix -->
+      <div class="col-auto mb-3">
+        <label for="price">Prix</label>
+        <input 
+          required
+          name="price"
+          [(ngModel)]="p.price"
+          #price="ngModel"
+          class="form-control"
+        >
+        <div *ngIf="price.invalid">Le prix est obligatoire</div>
+      </div>
+
+
+      
+
+      <!-- Bouton d'ajout -->
+      <button 
+        [disabled]="myForm.invalid"
+        (click)="addP()"
+        class="btn btn-primary w-100"
+      >
+        Ajouter
+      </button>
+    </div>
+  </div>
+</form>

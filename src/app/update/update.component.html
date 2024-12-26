@@ -1,0 +1,77 @@
+<h3>{{product.id}}</h3>
+<form #myForm="ngForm" class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4"> <!-- Réduire la largeur ici -->
+      
+        <div class="col-auto mb-3">
+          <label for="name" class="form-name">Nom</label>
+          <input 
+            required
+            value="test"
+            [(ngModel)]="product.name"
+            name="namep"
+            #n="ngModel"
+            class="form-control"
+          >
+          <div class="invalid-feedback" *ngIf="n.invalid && n.touched">
+            Le nom est obligatoire
+          </div>
+        </div>
+  
+        <div class="col-auto mb-3">
+          <label for="description">Description</label>
+          <textarea
+            pattern="[a-zA-Z]*"
+            minlength="5"
+            name="description"
+            required
+            [(ngModel)]="product.description"
+            #desc="ngModel"
+            class="form-control"
+          ></textarea>
+         
+          <div *ngIf="desc.errors">
+            <div *ngIf="desc.errors['required']">Champ obligatoire</div>
+            <div *ngIf="desc.errors['minlength']">
+              Minimum {{desc.errors['minlength']['requiredLength']}} caractères
+              alors que vous avez écrit {{desc.errors['minlength']['actualLength']}}
+            </div>
+            <div *ngIf="desc.errors['pattern']">Uniquement des lettres</div>
+          </div>
+        </div>
+  
+        <div class="col-auto mb-3">
+          <label for="price">categories </label>
+          <input 
+            required
+            name="categories"
+            [(ngModel)]="product.categoryId"
+            #price="ngModel"
+            class="form-control"
+          >
+          <div *ngIf="price.invalid">La categorie est obligatoire </div>
+        </div>
+  
+        <div class="col-auto mb-3">
+          <label for="price">Prix</label>
+          <input 
+            required
+            name="price"
+            [(ngModel)]="product.price"
+            #price="ngModel"
+            class="form-control"
+          >
+          <div *ngIf="price.invalid">Le prix est obligatoire</div>
+        </div>
+    
+        <button 
+          [disabled]="myForm.invalid"
+          (click)="updatep(product.id,product)"
+          class="btn btn-outline-primary"
+        >
+          update
+        </button>
+      </div>
+    </div>
+  </form>
+  
